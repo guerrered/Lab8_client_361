@@ -1,8 +1,10 @@
 
 
 
-public class GUI {
+public class GUI extends JFrame {
 
+	
+	
 	
 	
 	

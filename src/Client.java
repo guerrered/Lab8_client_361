@@ -60,6 +60,7 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 	
 	public void actionPerformed(ActionEvent e){
 		//add
@@ -90,6 +91,16 @@ public class Client {
 	
 	public String add(String LastName, String FirstName, String Phone, String Department,String Gender, String Title){
 		Employee employee = new Employee(LastName, FirstName, Phone, Department, Gender, Title);
+=======
+
+	private static String getJSON() {
+
+		ArrayList<Employee> em = new ArrayList<>();
+		em.add(new Employee("Eric", "Fritz", "Computer Science", "1","",""));
+		em.add(new Employee("Tanawat", "Khun", "Computer Science", "2","",""));
+		em.add(new Employee("Foo", "Bar", "Baz", "3","",""));
+		em.add(new Employee("Donald", "Duck", "Disney Animals", "4","",""));
+>>>>>>> master
 		Gson g = new Gson();
 		String json = g.toJson(employee);
 		String addS = "ADD";
