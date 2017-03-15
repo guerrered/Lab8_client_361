@@ -63,15 +63,15 @@ public class Client {
 	
 	public void actionPerformed(ActionEvent e){
 		//add
-		if(e.getSource()==gui.buttonAdd){
-			data =add(gui.getLastName(), gui.getFirstName(), gui.getPhone(), gui.getDept(), gui.getGender(), gui.getTitle());
+		if(e.getSource()==gui.Add){
+			data =add(gui.Ln.getText(), gui.Fn.getText(), gui.Cp.getText(), gui.de.getText(), gui.group.getSelection().getActionCommand(), (String)gui.combo.getSelectedItem());
 			out.writeBytes(data);
 			out.flush();
 			out.close();
 			System.out.println("Done sent to server");
 		}
 		//clear
-		else if(e.getSource() == gui.buttonClear){
+		else if(e.getSource() == gui.Cle){
 			data = "CLEAR";
 			out.writeBytes(data);
 			out.flush();
@@ -79,7 +79,7 @@ public class Client {
 			System.out.println("Done sent to server");
 		}
 		//print
-		else{
+		else if(e.getSource()==gui.Prt){
 			data = "PRINT";
 			out.writeBytes(data);
 			out.flush();
