@@ -16,13 +16,14 @@ public class Client implements ActionListener{
 	static GUI gui;
 	String data;
 	static DataOutputStream out;
+	static HttpURLConnection conn;
 	public static void main(String[] args) {
 		try {
 			System.out.println("in the client");
 
 			// Client will connect to this location
 			URL site = new URL("http://localhost:8000/sendresults");
-			HttpURLConnection conn = (HttpURLConnection) site.openConnection();
+			conn = (HttpURLConnection) site.openConnection();
 
 			// now create a POST request
 			conn.setRequestMethod("POST");
@@ -38,10 +39,12 @@ public class Client implements ActionListener{
 			gui = new GUI();
 
 			// write out string to output buffer for message
+			/*
+			 * the following should all be handled within the listener below
+			 */
 //			out.writeBytes(content);
 //			out.flush();
 //			out.close();
-
 //			System.out.println("Done sent to server");
 
 //			InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
@@ -89,6 +92,18 @@ public class Client implements ActionListener{
 			out.close();
 			System.out.println("Done sent to server");
 		}
+		InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
+
+		// string to hold the result of reading in the response
+		StringBuilder sb = new StringBuilder();
+
+		// read the characters from the request byte by byte and build up
+		// the Response
+		int nextChar;
+		while ((nextChar = inputStr.read()) > -1) {
+			sb = sb.append((char) nextChar);
+		}
+		System.out.println("Return String: " + sb);
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
