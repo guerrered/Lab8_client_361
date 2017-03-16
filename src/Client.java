@@ -1,4 +1,5 @@
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class Client {
+public class Client implements ActionListener{
 	static GUI gui;
 	String data;
 	static DataOutputStream out;
@@ -43,26 +44,28 @@ public class Client {
 
 //			System.out.println("Done sent to server");
 
-			InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
-
-			// string to hold the result of reading in the response
-			StringBuilder sb = new StringBuilder();
-
-			// read the characters from the request byte by byte and build up
-			// the Response
-			int nextChar;
-			while ((nextChar = inputStr.read()) > -1) {
-				sb = sb.append((char) nextChar);
-			}
-			System.out.println("Return String: " + sb);
+//			InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
+//
+//			// string to hold the result of reading in the response
+//			StringBuilder sb = new StringBuilder();
+//
+//			// read the characters from the request byte by byte and build up
+//			// the Response
+//			int nextChar;
+//			while ((nextChar = inputStr.read()) > -1) {
+//				sb = sb.append((char) nextChar);
+//			}
+//			System.out.println("Return String: " + sb);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+
 	public void actionPerformed(ActionEvent e){
 		//add
+		try{
 		if(e.getSource()==gui.Add){
 			data =add(gui.Ln.getText(), gui.Fn.getText(), gui.Cp.getText(), gui.de.getText(), gui.group.getSelection().getActionCommand(), (String)gui.combo.getSelectedItem());
 			out.writeBytes(data);
@@ -85,6 +88,9 @@ public class Client {
 			out.flush();
 			out.close();
 			System.out.println("Done sent to server");
+		}
+		}catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 	
@@ -115,5 +121,6 @@ public class Client {
 //		String json = g.toJson(employee);
 //		return json;
 //	}
+
 
 }

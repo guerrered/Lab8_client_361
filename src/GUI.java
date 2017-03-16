@@ -2,8 +2,10 @@ import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -63,6 +65,8 @@ public class GUI extends JFrame {
 		group.add(option1);
 		group.add(option2);
 		group.add(option3);
+		//one button should be selected by default
+		option1.setSelected(true);
 		
 		
 		
@@ -81,6 +85,10 @@ public class GUI extends JFrame {
 		Add= new JButton("ADD");
 		Cle= new JButton("CLE");
 		Prt= new JButton("PRINT");
+		ActionListener al = new Client();
+		Add.addActionListener(al);
+		Cle.addActionListener(al);
+		Prt.addActionListener(al);
 		
 		JPanel Container = new JPanel();
 		Container.setLayout(new GridLayout(7,2));
