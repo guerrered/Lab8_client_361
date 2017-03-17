@@ -7,7 +7,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Scanner;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,7 +28,7 @@ public class Client implements ActionListener{
 			// Client will connect to this location
 			URL site = new URL("http://localhost:8000/sendresults");
 			conn = (HttpURLConnection) site.openConnection();
-
+			
 			// now create a POST request
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
@@ -66,11 +70,27 @@ public class Client implements ActionListener{
 	}
 	
 
+	    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+	        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+	            AbstractButton button = buttons.nextElement();
+
+	            if (button.isSelected()) {
+	                return button.getText();
+	            }
+	        }
+
+	        return null;
+	    }
+	
+	
 	public void actionPerformed(ActionEvent e){
 		//add
 		try{
 		if(e.getSource()==gui.Add){
-			data =add(gui.Ln.getText(), gui.Fn.getText(), gui.Cp.getText(), gui.de.getText(), gui.group.getSelection().getActionCommand(), (String)gui.combo.getSelectedItem());
+			String gender=getSelectedButtonText(gui.group);
+			
+			
+			data =add(gui.Ln.getText(), gui.Fn.getText(), gui.Cp.getText(), gui.de.getText(), gender, (String)gui.combo.getSelectedItem());
 			out.writeBytes(data);
 			out.flush();
 			//out.close();
