@@ -72,9 +72,9 @@ public class GUI extends JFrame {
 		Checkbox option2= new Checkbox("Female",ingGrp,false);
 		Checkbox option3= new Checkbox("Other",ingGrp,false);
 		*/
-		option1.setActionCommand(getName());
-		option2.setActionCommand(getName());
-		option3.setActionCommand(getName());
+		option1.setActionCommand("Male");
+		option2.setActionCommand("Female");
+		option3.setActionCommand("Other");
 		
 		group = new ButtonGroup();
 		group.add(option1);
