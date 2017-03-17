@@ -113,7 +113,7 @@ public class Client implements ActionListener{
 		Employee employee = new Employee(LastName, FirstName, Phone, Department, Gender, Title);
 		Gson g = new Gson();
 		String json = g.toJson(employee);
-		String addS = "ADD";
+		String addS = "ADD ";
 		addS+=json;
 		
 		return addS;
