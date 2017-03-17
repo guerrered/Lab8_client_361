@@ -97,8 +97,7 @@ public class Client implements ActionListener{
 			data =add(gui.Ln.getText(), gui.Fn.getText(), gui.Cp.getText(), gui.de.getText(), gui.group.getSelection().getActionCommand(), (String)gui.combo.getSelectedItem());
 			out.writeBytes(data);
 			out.flush();
-			//out.close();
-			System.out.println("Done sent to server");
+			System.out.println("Done sent to server\n" + data +"\n" );
 		}
 		//clear
 		else if(e.getSource() == gui.Cle){
@@ -106,7 +105,7 @@ public class Client implements ActionListener{
 			out.writeBytes(data);
 			out.flush();
 			//out.close();
-			System.out.println("Done sent to server");
+			System.out.println("Done sent to server\n" + data +"\n");
 		}
 		//print
 		else if(e.getSource()==gui.Prt){
@@ -114,7 +113,7 @@ public class Client implements ActionListener{
 			out.writeBytes(data);
 			out.flush();
 			//out.close();
-			System.out.println("Done sent to server");
+			System.out.println("Done sent to server\n" + data + "\n");
 		}
 		InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
 
