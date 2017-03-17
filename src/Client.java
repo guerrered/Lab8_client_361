@@ -1,8 +1,11 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,26 +20,17 @@ public class Client implements ActionListener{
 	String data;
 	static DataOutputStream out;
 	static HttpURLConnection conn;
-	public static void main(String[] args) {
+	public  Client(GUI g) {
 		try {
 			System.out.println("in the client");
 
-			// Client will connect to this location
-			URL site = new URL("http://localhost:8000/sendresults");
-			conn = (HttpURLConnection) site.openConnection();
-
-			// now create a POST request
-			conn.setRequestMethod("POST");
-			conn.setDoOutput(true);
-			conn.setDoInput(true);
-			//DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-			out = new DataOutputStream(conn.getOutputStream());
+			
 			
 			// build a string that contains JSON from console
 			//String content = "";
 			//content = getJSON();
 			
-			gui = new GUI();
+			gui = g;//new GUI();
 
 			// write out string to output buffer for message
 			/*
@@ -67,7 +61,37 @@ public class Client implements ActionListener{
 	
 
 	public void actionPerformed(ActionEvent e){
-		//add
+		//add// Client will connect to this location
+		URL site = null;
+		try {
+			site = new URL("http://localhost:8000/sendresults");
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			conn = (HttpURLConnection) site.openConnection();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
+		// now create a POST request
+		try {
+			conn.setRequestMethod("POST");
+		} catch (ProtocolException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		//DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+		try {
+			out = new DataOutputStream(conn.getOutputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try{
 		if(e.getSource()==gui.Add){
 			data =add(gui.Ln.getText(), gui.Fn.getText(), gui.Cp.getText(), gui.de.getText(), gui.group.getSelection().getActionCommand(), (String)gui.combo.getSelectedItem());
@@ -107,6 +131,7 @@ public class Client implements ActionListener{
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		conn.disconnect();
 	}
 	
 	public String add(String LastName, String FirstName, String Phone, String Department,String Gender, String Title){

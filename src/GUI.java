@@ -99,12 +99,7 @@ public class GUI extends JFrame {
 		Cp = new JTextField();
 		Add= new JButton("ADD");
 		Cle= new JButton("CLE");
-		Prt= new JButton("PRINT");
-		ActionListener al = new Client();
-		Add.addActionListener(al);
-		Cle.addActionListener(al);
-		Prt.addActionListener(al);
-		
+		Prt= new JButton("PRINT");		
 		JPanel Container = new JPanel();
 		Container.setLayout(new GridLayout(7,2));
 		
@@ -127,6 +122,12 @@ public class GUI extends JFrame {
 		Container.add(Button);
 		Container.add(Prt);
 		add(Container);
+		ActionListener al = new Client(this);
+		Add.addActionListener(al);
+		Cle.addActionListener(al);
+		Prt.addActionListener(al);
+		
+
 		
 	}
 	
