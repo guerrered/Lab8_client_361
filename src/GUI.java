@@ -3,6 +3,9 @@ import java.awt.CheckboxGroup;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
@@ -30,6 +33,18 @@ public class GUI extends JFrame {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setPreferredSize(new Dimension(500,300));
 	pack();
+	this.addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent e) {
+        	try {
+				Client.out.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            System.out.println("window closed. OutputStream has been closed");
+        }
+
+    });
 	createContents();
 	setVisible(true);
 	

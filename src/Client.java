@@ -73,7 +73,7 @@ public class Client implements ActionListener{
 			data =add(gui.Ln.getText(), gui.Fn.getText(), gui.Cp.getText(), gui.de.getText(), gui.group.getSelection().getActionCommand(), (String)gui.combo.getSelectedItem());
 			out.writeBytes(data);
 			out.flush();
-			out.close();
+			//out.close();
 			System.out.println("Done sent to server");
 		}
 		//clear
@@ -81,7 +81,7 @@ public class Client implements ActionListener{
 			data = "CLEAR";
 			out.writeBytes(data);
 			out.flush();
-			out.close();
+			//out.close();
 			System.out.println("Done sent to server");
 		}
 		//print
@@ -89,7 +89,7 @@ public class Client implements ActionListener{
 			data = "PRINT";
 			out.writeBytes(data);
 			out.flush();
-			out.close();
+			//out.close();
 			System.out.println("Done sent to server");
 		}
 		InputStreamReader inputStr = new InputStreamReader(conn.getInputStream());
